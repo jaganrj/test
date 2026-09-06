@@ -1,0 +1,291 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "factrj"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureSqlDatabase1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase1'"
+		},
+		"AzureSqlDatabase2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDatabase2'"
+		},
+		"AzureSqlDb_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'AzureSqlDb'"
+		},
+		"LS_scd_sqldb_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_scd_sqldb'"
+		},
+		"MySqltoADLS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'MySqltoADLS'"
+		},
+		"dbscd2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'dbscd2'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://rjaug.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://akvsqldb1.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "jaggu.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "mydb"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "jaggu"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "testserveraug.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "free-sql-db"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "rootrj"
+		},
+		"AzureSqlDb_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "roott.database.windows.net"
+		},
+		"AzureSqlDb_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "jaggu"
+		},
+		"AzureSqlDb_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "adminn"
+		},
+		"LS_scd_sqldb_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "testserveraug.database.windows.net"
+		},
+		"LS_scd_sqldb_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "free-sql-db"
+		},
+		"LS_scd_sqldb_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "rootrj"
+		},
+		"MySqltoADLS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "127.0.0.1"
+		},
+		"MySqltoADLS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "prod"
+		},
+		"MySqltoADLS_properties_typeProperties_username": {
+			"type": "string",
+			"defaultValue": "root"
+		},
+		"dbscd2_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "rootrj.database.windows.net"
+		},
+		"dbscd2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "rj"
+		},
+		"dbscd2_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "admins"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "factrj_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureSqlDatabase1_password": {
+						"value": "[parameters('AzureSqlDatabase1_password')]"
+					},
+					"AzureSqlDatabase2_password": {
+						"value": "[parameters('AzureSqlDatabase2_password')]"
+					},
+					"AzureSqlDb_password": {
+						"value": "[parameters('AzureSqlDb_password')]"
+					},
+					"LS_scd_sqldb_password": {
+						"value": "[parameters('LS_scd_sqldb_password')]"
+					},
+					"dbscd2_password": {
+						"value": "[parameters('dbscd2_password')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_database')]"
+					},
+					"AzureSqlDatabase2_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDatabase2_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDb_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDb_properties_typeProperties_server')]"
+					},
+					"AzureSqlDb_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDb_properties_typeProperties_database')]"
+					},
+					"AzureSqlDb_properties_typeProperties_userName": {
+						"value": "[parameters('AzureSqlDb_properties_typeProperties_userName')]"
+					},
+					"LS_scd_sqldb_properties_typeProperties_server": {
+						"value": "[parameters('LS_scd_sqldb_properties_typeProperties_server')]"
+					},
+					"LS_scd_sqldb_properties_typeProperties_database": {
+						"value": "[parameters('LS_scd_sqldb_properties_typeProperties_database')]"
+					},
+					"LS_scd_sqldb_properties_typeProperties_userName": {
+						"value": "[parameters('LS_scd_sqldb_properties_typeProperties_userName')]"
+					},
+					"dbscd2_properties_typeProperties_server": {
+						"value": "[parameters('dbscd2_properties_typeProperties_server')]"
+					},
+					"dbscd2_properties_typeProperties_database": {
+						"value": "[parameters('dbscd2_properties_typeProperties_database')]"
+					},
+					"dbscd2_properties_typeProperties_userName": {
+						"value": "[parameters('dbscd2_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "factrj_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'factrj_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "factrj_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"MySqltoADLS_password": {
+						"value": "[parameters('MySqltoADLS_password')]"
+					},
+					"MySqltoADLS_properties_typeProperties_server": {
+						"value": "[parameters('MySqltoADLS_properties_typeProperties_server')]"
+					},
+					"MySqltoADLS_properties_typeProperties_database": {
+						"value": "[parameters('MySqltoADLS_properties_typeProperties_database')]"
+					},
+					"MySqltoADLS_properties_typeProperties_username": {
+						"value": "[parameters('MySqltoADLS_properties_typeProperties_username')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'factrj_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "factrj_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'factrj_ArmTemplate_2')]"
+			]
+		}
+	]
+}

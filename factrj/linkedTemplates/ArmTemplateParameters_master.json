@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "factrj"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
+		"AzureSqlDatabase2_password": {
+			"value": ""
+		},
+		"AzureSqlDb_password": {
+			"value": ""
+		},
+		"LS_scd_sqldb_password": {
+			"value": ""
+		},
+		"MySqltoADLS_password": {
+			"value": ""
+		},
+		"dbscd2_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://rjaug.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://akvsqldb1.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "jaggu.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "mydb"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "jaggu"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_server": {
+			"value": "testserveraug.database.windows.net"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_database": {
+			"value": "free-sql-db"
+		},
+		"AzureSqlDatabase2_properties_typeProperties_userName": {
+			"value": "rootrj"
+		},
+		"AzureSqlDb_properties_typeProperties_server": {
+			"value": "roott.database.windows.net"
+		},
+		"AzureSqlDb_properties_typeProperties_database": {
+			"value": "jaggu"
+		},
+		"AzureSqlDb_properties_typeProperties_userName": {
+			"value": "adminn"
+		},
+		"LS_scd_sqldb_properties_typeProperties_server": {
+			"value": "testserveraug.database.windows.net"
+		},
+		"LS_scd_sqldb_properties_typeProperties_database": {
+			"value": "free-sql-db"
+		},
+		"LS_scd_sqldb_properties_typeProperties_userName": {
+			"value": "rootrj"
+		},
+		"MySqltoADLS_properties_typeProperties_server": {
+			"value": "127.0.0.1"
+		},
+		"MySqltoADLS_properties_typeProperties_database": {
+			"value": "prod"
+		},
+		"MySqltoADLS_properties_typeProperties_username": {
+			"value": "root"
+		},
+		"dbscd2_properties_typeProperties_server": {
+			"value": "rootrj.database.windows.net"
+		},
+		"dbscd2_properties_typeProperties_database": {
+			"value": "rj"
+		},
+		"dbscd2_properties_typeProperties_userName": {
+			"value": "admins"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
