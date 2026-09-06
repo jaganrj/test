@@ -1,0 +1,15 @@
+{
+	"name": "factrj",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "6cbf7e45-fb87-4a2f-a566-4cc014829611",
+		"tenantId": "c6d39fb2-4316-47c1-a349-18448a9d7bf0"
+	}
+}

@@ -1,0 +1,13 @@
+{
+	"name": "if_condition",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "MySqltoADLS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "MySqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

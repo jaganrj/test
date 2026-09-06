@@ -1,0 +1,49 @@
+{
+	"name": "excute_multiple_PL",
+	"properties": {
+		"activities": [
+			{
+				"name": "copy",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "copy_files",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "filter",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "copy",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "for_loop",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2026-08-12T07:39:28Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

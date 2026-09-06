@@ -1,0 +1,167 @@
+{
+	"name": "scd_type_2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "scd_2",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "dbscd2",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "scd2db",
+						"type": "DatasetReference"
+					},
+					"name": "sinkdbscd2"
+				},
+				{
+					"dataset": {
+						"referenceName": "update_db_col",
+						"type": "DatasetReference"
+					},
+					"name": "sinkdbcol"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColhc"
+				},
+				{
+					"name": "derivedChc2"
+				},
+				{
+					"name": "exists1"
+				},
+				{
+					"name": "derivactivity"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "exists2"
+				},
+				{
+					"name": "exists3"
+				},
+				{
+					"name": "derivedestactive"
+				},
+				{
+					"name": "alterRow1"
+				},
+				{
+					"name": "select2"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as integer,",
+				"          name as string,",
+				"          salary as integer,",
+				"          location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     partitionBy('hash', 1)) ~> source1",
+				"source(output(",
+				"          surrkey as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          salary as integer,",
+				"          location as string,",
+				"          is_active as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1 derive(hashcode = md5(id,name,salary,location),",
+				"     partitionBy('hash', 1)) ~> derivedColhc",
+				"source2 derive(hashcode = md5(id,name,salary,location)) ~> derivedChc2",
+				"derivedColhc, derivedChc2 exists(derivedColhc@hashcode == derivedChc2@hashcode,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists1",
+				"exists1 derive(is_active = 1) ~> derivactivity",
+				"derivactivity select(mapColumn(",
+				"          id,",
+				"          name,",
+				"          salary,",
+				"          location,",
+				"          is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"derivedChc2, derivedColhc exists(source2@id == source1@id,",
+				"     negate:false,",
+				"     broadcast: 'auto')~> exists2",
+				"exists2, exists1 exists(derivedChc2@hashcode == derivedColhc@hashcode,",
+				"     negate:true,",
+				"     broadcast: 'auto')~> exists3",
+				"exists3 derive(is_active = 0) ~> derivedestactive",
+				"derivedestactive alterRow(updateIf(1==1)) ~> alterRow1",
+				"alterRow1 select(mapColumn(",
+				"          surrkey,",
+				"          id,",
+				"          name,",
+				"          salary,",
+				"          location,",
+				"          is_active",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select2",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          surrkey as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          salary as integer,",
+				"          location as string,",
+				"          is_active as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkdbscd2",
+				"select2 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          surrkey as integer,",
+				"          id as integer,",
+				"          name as string,",
+				"          salary as integer,",
+				"          location as string,",
+				"          is_active as integer",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['surrkey'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     errorHandlingOption: 'stopOnFirstError') ~> sinkdbcol"
+			]
+		}
+	}
+}
